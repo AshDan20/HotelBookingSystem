@@ -24,6 +24,24 @@ public class HotelController {
     return hotelService.getAllHotels();
   }
 
+  @DeleteMapping(value = "/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public void deleteHotelById(@PathVariable("id") long hotelId) {
+    hotelService.deleteHotelById(hotelId);
+  }
+
+  @GetMapping(value = "/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public Hotel getHotelById(@PathVariable("id") long hotelId) {
+    return hotelService.getHotelById(hotelId);
+  }
+
+  @GetMapping(value = "/search/{cityId}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<Hotel> getTopThreeHotels(@PathVariable("cityId") long cityId) {
+    return hotelService.getTopThreeHotels(cityId);
+  }
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public Hotel createHotel(@RequestBody Hotel hotel) {

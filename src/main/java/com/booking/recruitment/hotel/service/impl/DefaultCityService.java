@@ -6,6 +6,8 @@ import com.booking.recruitment.hotel.model.City;
 import com.booking.recruitment.hotel.repository.CityRepository;
 import com.booking.recruitment.hotel.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,8 +29,8 @@ class DefaultCityService implements CityService {
   }
 
   @Override
-  public List<City> getAllCities() {
-    return cityRepository.findAll();
+  public ResponseEntity<List<City>> getAllCities() {
+    return new ResponseEntity<List<City>>(cityRepository.findAll(), HttpStatus.OK);
   }
 
   @Override

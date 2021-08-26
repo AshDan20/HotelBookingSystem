@@ -4,13 +4,14 @@ import com.booking.recruitment.hotel.model.City;
 import com.booking.recruitment.hotel.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/city")
-public class CityController {
+  public class CityController {
   private final CityService cityService;
 
   @Autowired
@@ -20,11 +21,19 @@ public class CityController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<City> getAllCities() {
+  public ResponseEntity<List<City>> getAllCities() {
     return cityService.getAllCities();
   }
 
-  @PostMapping
+  @GetMapping(value = "/{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public City getCityById(@PathVariable ("id") long cityId) {
+    return cityService.getCityById(cityId);
+  }
+
+
+
+  @PostMapping(produces = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   public City createCity(@RequestBody City city) {
     return cityService.createCity(city);
